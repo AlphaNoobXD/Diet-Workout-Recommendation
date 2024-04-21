@@ -5,10 +5,13 @@ from langchain_openai import OpenAI
 from langchain.chains import LLMChain
 import re
 import os
+import requests
+from dotenv import load_dotenv, dotenv_values
+config = dotenv_values(".env")
 
 
 
-os.environ['OPENAI_API_KEY'] = 'sk-proj-Koako9tin5Gmzii44hBRT3BlbkFJBIDrBC2y1o5Uwt8QhCbS'
+os.environ['OPENAI_API_KEY'] = config['OPENAI_API_KEY']
 
 st.title("Personalized Diet and Workout Recommender:coffee:")
 st.markdown('<style>h1{color: orange; text-align: center;}</style>', unsafe_allow_html=True)
@@ -55,7 +58,7 @@ if st.button("Get Recommendations"):
         'disease': disease
     }
     results = chain.run(input_data)
-    print ("-------------------results", results)
+    print ("-------------------Open AI result----------------", results)
 
     # Initialize recommendation lists
     restaurant_names = []
